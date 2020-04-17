@@ -1,0 +1,21 @@
+{{ $FULL_NAME := printf "%s" (env "FULL_NAME") -}}{{- println -}}
+
+{{ $FULL_NAME| replaceAll "_" " " }}
+{{ key (printf "%s/email" $FULL_NAME) }} / {{ key (printf "%s/phone" $FULL_NAME) }}
+
+
+Summary: {{ key (printf "%s/profile_summary" $FULL_NAME) }}
+
+
+Work Experience:
+{{- range $org_key, $org_pairs := tree (printf "%s/org/" $FULL_NAME) | byKey }}{{ println }}
+{{ key (printf "%s/org/%s/name" $FULL_NAME $org_key ) }}
+{{- range $position_key := $org_pairs }}
+{{- if .Key | contains "position" }}
+{{- if .Key | contains "name" -}}
+{{ println }}
+  {{ .Value }}
+{{- else if .Key | contains "task" }}
+  - {{ .Value }}
+{{- end -}}{{- end -}}{{ end }}
+{{ println }}{{ end }}
