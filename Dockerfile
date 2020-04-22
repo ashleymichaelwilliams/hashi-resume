@@ -87,11 +87,13 @@ COPY --from=scratch /usr/local/bin/envconsul /usr/local/bin/envconsul
 
 ### Stage Project Files in Containers Filesystem
 COPY --chown=deploy docker-entrypoint.sh /home/deploy/docker-entrypoint.sh
+COPY --chown=deploy fixtures.sh /home/deploy/fixtures.sh
 COPY --chown=deploy resume.ctmpl /home/deploy/resume.ctmpl
 
 
 # Set File Permissions
 RUN sudo chmod 755 /home/deploy/docker-entrypoint.sh
+RUN sudo chmod 755 /home/deploy/fixtures.sh
 RUN sudo chmod 755 /home/deploy/resume.ctmpl
 
 
