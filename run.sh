@@ -14,15 +14,15 @@ if [[ "${CONTAINER_CHECK}" != *"true"* ]]; then
   sleep 2
   
   echo "Running Fixtures Script..."
-  docker exec hashi-resume /bin/sh -c "source /home/deploy/fixtures.sh $1"
+  docker exec hashi-resume /bin/sh -c "source ./fixtures.sh $1"
 
 elif [[ "${CONTAINER_CHECK}" == *"true"* ]]; then
   echo "Container is Already Running..."
-  docker exec hashi-resume /bin/sh -c "consul kv get --recurse $1 | grep -i $1 > /dev/null 2>&1 && echo 'Fixtures Already Exist...' || source /home/deploy/fixtures.sh $1"
+  docker exec hashi-resume /bin/sh -c "consul kv get --recurse $1 | grep -i $1 > /dev/null 2>&1 && echo 'Fixtures Already Exist...' || source ./fixtures.sh $1"
 
 fi
 
 
 # Render and Print Resume
-docker exec -it hashi-resume /bin/sh -c "export FULL_NAME=$1; consul-template -log-level=info -template='/home/deploy/resume.ctmpl:/home/deploy/resume.txt' -once"
-docker exec -it hashi-resume cat /home/deploy/resume.txt
+docker exec -it hashi-resume /bin/sh -c "export FULL_NAME=$1; consul-template -log-level=info -template='resume.ctmpl:resume.txt' -once"
+docker exec -it hashi-resume cat resume.txt

@@ -4,7 +4,7 @@
 consul agent \
  -dev \
  -datacenter="dc1" \
- -data-dir="/home/deploy/consul/consul-data" \
+ -data-dir="~/consul/consul-data" \
  -server=true \
  -client="0.0.0.0" \
  -ui=true \
