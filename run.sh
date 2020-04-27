@@ -26,3 +26,8 @@ fi
 # Render and Print Resume
 docker exec -it hashi-resume /bin/sh -c "export FULL_NAME=$1; consul-template -log-level=info -template='resume.ctmpl:resume.txt' -once"
 docker exec -it hashi-resume cat resume.txt
+
+sleep 3
+
+# Open Consul's Key/Value Page
+open http://localhost:8500/ui/dc1/kv

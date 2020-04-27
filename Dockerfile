@@ -56,7 +56,7 @@ RUN sudo unzip $HOME/envconsul_${ENVCONSUL_VERSION}_linux_amd64.zip -d /usr/loca
 ###         Deployable Artifact Container Image         ###
 ###########################################################
 
-FROM golang:alpine
+FROM alpine:latest
 
 ARG USER=alpine
 ENV HOME=/home/$USER
