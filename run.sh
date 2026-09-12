@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Require a key-prefix argument (e.g. ASHLEY_WILLIAMS).
+if [[ -z "$1" ]]; then
+  echo "Usage: $0 <FULL_NAME>"
+  echo "  e.g. $0 ASHLEY_WILLIAMS"
+  exit 1
+fi
+
 # Start Container Image
 CONTAINER_CHECK=($(docker inspect hashi-resume -f '{{.State.Running}}' > /dev/null 2>&1 && echo true || echo false))
 
@@ -14,18 +21,18 @@ if [[ "${CONTAINER_CHECK}" != *"true"* ]]; then
   sleep 2
   
   echo "Running Fixtures Script..."
-  docker exec hashi-resume /bin/sh -c "source ./fixtures.sh $1"
+  docker exec hashi-resume /bin/sh -c "source ./fixtures.sh \"$1\""
 
 elif [[ "${CONTAINER_CHECK}" == *"true"* ]]; then
   echo "Container is Already Running..."
-  docker exec hashi-resume /bin/sh -c "consul kv get --recurse $1 | grep -i $1 > /dev/null 2>&1 && echo 'Fixtures Already Exist...' || source ./fixtures.sh $1"
+  docker exec hashi-resume /bin/sh -c "consul kv get --recurse \"$1\" | grep -i \"$1\" > /dev/null 2>&1 && echo 'Fixtures Already Exist...' || source ./fixtures.sh \"$1\""
 
 fi
 
 
 # Render and Print Resume
-docker exec -it hashi-resume /bin/sh -c "export FULL_NAME=$1; consul-template -log-level=info -template='resume.ctmpl:resume.txt' -once"
-docker exec -it hashi-resume cat resume.txt
+docker exec hashi-resume /bin/sh -c "export FULL_NAME=\"$1\"; consul-template -log-level=info -template='resume.ctmpl:resume.txt' -once"
+docker exec hashi-resume cat resume.txt
 
 sleep 3
 

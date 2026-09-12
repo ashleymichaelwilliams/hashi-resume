@@ -1,0 +1,30 @@
+# Populate Consul with Data
+consul kv put "$1/address" "San Diego, California"
+consul kv put "$1/email" "ashleymichaelwilliams@gmail.com"
+consul kv put "$1/phone" "619-807-0682"
+consul kv put "$1/profile_summary" "Staff Platform Engineer with 15+ years building cloud infrastructure and automated delivery systems. Led internal developer platform strategy and standardized delivery patterns across 500+ applications. Experience spans Kubernetes, infrastructure as code, enterprise secrets management, and observability across AWS, GCP, and Azure cloud environments."
+
+consul kv put "$1/org/0/name" "LYTX, INC. | Remote | March 2021 - Present"
+consul kv put "$1/org/0/position/0/name" "Staff DevOps / Platform Engineer"
+consul kv put "$1/org/0/position/0/tasks/0" "Led internal developer platform strategy and built self-service capabilities that enabled development teams to provision infrastructure and promote code independently across cloud environments. Established golden-path deployment patterns and preconfigured pipelines, contributing to approximately 40% faster feature lead time and 60% fewer cross-team deployment errors. Scaled reusable infrastructure-as-code modules and CI/CD blueprints across 350+ microservices, improving onboarding speed and deployment consistency. Set enterprise platform architecture and governance across secrets management, APIs, messaging, security, QA, and developer delivery, aligning Engineering and Security teams on shared standards. Senior DevOps Automation Engineer Built an enterprise infrastructure-as-code module library and standardized pipelines, providing reusable, compliant building blocks for cloud services. Led Vault-based enterprise secrets management and zero-trust authentication, reducing credential-related incidents by 85%. Integrated GHAS vulnerability scanning, WAF, EDR, and automated QA controls into delivery workflows. Delivered a centralized API gateway and Pub/Sub and IoT messaging backends for secure, governed, real-time service communication."
+
+consul kv put "$1/org/1/name" "BECTON DICKINSON | San Diego | September 2019 - March 2021"
+consul kv put "$1/org/1/position/0/name" "Senior CloudOps / DevOps Engineer"
+consul kv put "$1/org/1/position/0/tasks/0" "Led a global migration of product monitoring to Datadog, delivering \$150K+ in annual recurring savings and improving mean time to detect by 35%. Expanded observability adoption across teams. Built APM, synthetic testing, and distributed logging frameworks for mission-critical healthcare applications and operated a highly available Azure Kubernetes Service platform for .NET Core services and Couchbase DB. Defined cloud service architectures and established bi-weekly technical exchange forums to align Product and Operations teams on delivery methods and platform standards."
+
+consul kv put "$1/org/2/name" "DEXCOM | San Diego | April 2018 - September 2019"
+consul kv put "$1/org/2/position/0/name" "Staff DevOps Engineer - Data Platform"
+consul kv put "$1/org/2/position/0/tasks/0" "Led migration and regional expansion of high-scale Kubernetes workloads from AWS to GKE, supporting global availability, data-residency requirements, and multi-cloud operations. Created unified IaC, reusable CI/CD workflows, and self-service tooling; managed 20+ multi-tenant Kubernetes clusters and standardized deployments across GCP and AWS. Built Datadog, Prometheus, and Grafana observability; automated Cassandra backup/restore; implemented SIEM and RBAC controls for sensitive PII/PHI workloads. Reduced operating cost through resource right-sizing, preemptible instances, and scheduled scale-down of non-production environments; aligned Product Development, Machine Learning, and leadership across local and remote teams."
+
+consul kv put "$1/org/3/name" "GREATCALL | San Diego | February 2016 - April 2018"
+consul kv put "$1/org/3/position/0/name" "CloudOps Engineer"
+consul kv put "$1/org/3/position/0/tasks/0" "Built globally distributed AWS infrastructure and a redundant multi-region Direct Connect hub/spoke network supporting secure, highly available services. Operated sharded IBM MessageSight MQTT infrastructure supporting persistent connections for 300K+ customer devices. Automated AWS delivery with CloudFormation and Jenkins, reducing environment provisioning from 8 hours to 30 minutes; improved CI/CD efficiency with Docker and on-demand Jenkins agents."
+
+consul kv put "$1/org/4/name" "UNIVERSITY OF CALIFORNIA SAN DIEGO | San Diego | February 2015 - February 2016"
+consul kv put "$1/org/4/position/0/name" "Senior Systems Engineer"
+consul kv put "$1/org/4/position/0/tasks/0" "Built the secure multi-tenant iDASH research cloud for Biomedical Informatics, supporting HPC workloads and sensitive genomic data under rigorous compliance requirements. Implemented VMware NSX micro-segmentation, self-service provisioning with VMware/Docker automation, and hardened Puppet baselines for NIH-funded research workloads. Co-developed cloud charge-back tooling and helped deploy PanCancer Analysis of Whole Genomes workflows using Docker, SeqWare, and Sanger pipelines for TCGA/ICGC datasets."
+
+consul kv put "$1/org/5/name" "BRIDGEPOINT EDUCATION | San Diego | September 2011 - February 2015"
+consul kv put "$1/org/5/position/0/name" "Datacenter VMware Engineer II"
+consul kv put "$1/org/5/position/0/tasks/0" "Managed a vCloud Suite private-cloud platform spanning 100+ hosts and 2,500+ virtual machines; integrated ServiceNow with vCenter Orchestrator to enable ticket-triggered, zero-touch provisioning. Led workload right-sizing and datacenter migrations across three locations using vMotion, storage replication, and custom scripting; implemented Splunk/Syslog and vCOPS monitoring for platform health. SCM Release Engineer I Managed delivery of 30+ applications across 500+ production and pre-production systems using LAMP and .NET stacks; standardized release architectures and strengthened Dev/Ops collaboration. Managed F5 BigIP LTM configurations and post-deployment monitoring with SCOM, ipMonitor, and Gomez to support resilient production transitions."
+
