@@ -5,16 +5,16 @@ A self-contained Docker-based resume renderer that populates Consul KV with resu
 ## Overview
 
 ```
-┌──────────────┐     ┌──────────────────┐     ┌─────────────┐     ┌──────────────┐
-│  PDF Resume   │ ──▶ │ generate_fixtures │ ──▶ │ fixtures.sh │ ──▶ │ Consul KV     │
-│ (.pdf)        │     │  .py (pypdf)      │     │ (consul cmd) │     │ (key/value)   │
-└──────────────┘     └──────────────────┘     └─────────────┘     └──────┬───────┘
+┌──────────────┐     ┌───────────────────┐     ┌──────────────┐     ┌──────────────┐
+│  PDF Resume  │ ──▶ │ generate_fixtures │ ──▶ │ fixtures.sh  │ ──▶ │ Consul KV    │
+│ (.pdf)       │     │  .py (pypdf)      │     │ (consul cmd) │     │ (key/value)  │
+└──────────────┘     └───────────────────┘     └──────────────┘     └──────┬───────┘
                                                                            │
                                                                            ▼
                                                                      ┌────────────┐
                                                                      │ consul-    │
                                                                      │ template   │
-                                                                     │ .ctmpl      │
+                                                                     │ .ctmpl     │
                                                                      └─────┬──────┘
                                                                            │
                                                                            ▼
