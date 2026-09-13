@@ -2,10 +2,13 @@
 
 # Require a key-prefix argument (e.g. ASHLEY_WILLIAMS).
 if [[ -z "$1" ]]; then
-  echo "Usage: $0 <FULL_NAME>"
+  echo "Usage: $0 <FULL_NAME> [markdown]"
   echo "  e.g. $0 ASHLEY_WILLIAMS"
+  echo "       $0 ASHLEY_WILLIAMS markdown"
   exit 1
 fi
+
+FORMAT="${2:-text}"
 
 # Start Container Image
 CONTAINER_CHECK=($(docker inspect hashi-resume -f '{{.State.Running}}' > /dev/null 2>&1 && echo true || echo false))
@@ -31,8 +34,13 @@ fi
 
 
 # Render and Print Resume
-docker exec hashi-resume /bin/sh -c "export FULL_NAME=\"$1\"; consul-template -log-level=info -template='resume.ctmpl:resume.txt' -once"
-docker exec hashi-resume cat resume.txt
+if [[ "$FORMAT" == "markdown" ]]; then
+  docker exec hashi-resume /bin/sh -c "export FULL_NAME=\"$1\"; consul-template -log-level=info -template='resume-markdown.ctmpl:resume.md' -once"
+  docker exec hashi-resume cat resume.md
+else
+  docker exec hashi-resume /bin/sh -c "export FULL_NAME=\"$1\"; consul-template -log-level=info -template='resume.ctmpl:resume.txt' -once"
+  docker exec hashi-resume cat resume.txt
+fi
 
 sleep 3
 

@@ -1,7 +1,7 @@
 {{ $FULL_NAME := printf "%s" (env "FULL_NAME") -}}{{- println -}}
 
 {{ $FULL_NAME| replaceAll "_" " " }}
-{{ key (printf "%s/address" $FULL_NAME) }} · {{ key (printf "%s/email" $FULL_NAME) }} · {{ key (printf "%s/phone" $FULL_NAME) }}
+{{ key (printf "%s/address" $FULL_NAME) }} · {{ key (printf "%s/email" $FULL_NAME) }}
 
 
 Summary: {{ key (printf "%s/profile_summary" $FULL_NAME) }}

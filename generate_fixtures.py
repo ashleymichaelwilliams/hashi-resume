@@ -15,7 +15,7 @@ The script performs three logical steps:
   3. Shell-safe fixtures.sh generation
 
 Mapping from resume sections -> Consul KV keys:
-  Contact line  -> $1/address, $1/email, $1/phone
+  Contact line  -> $1/address, $1/email
   Profile block -> $1/profile_summary
   Each company  -> $1/org/<N>/name          (includes location + dates)
   Each position -> $1/org/<N>/position/<P>/name
@@ -232,7 +232,6 @@ def generate_fixtures(data: ResumeData) -> str:
     lines: list[str] = ["# Populate Consul with Data"]
     lines.append(f'consul kv put "$1/address" "{shell_escape(data.address)}"')
     lines.append(f'consul kv put "$1/email" "{shell_escape(data.email)}"')
-    lines.append(f'consul kv put "$1/phone" "{shell_escape(data.phone)}"')
     lines.append(f'consul kv put "$1/profile_summary" "{shell_escape(data.profile_summary)}"')
     lines.append("")
 
@@ -291,7 +290,6 @@ def main():
     print(f"      Name:              {data.name}")
     print(f"      Address:           {data.address}")
     print(f"      Email:             {data.email}")
-    print(f"      Phone:             {data.phone}")
     print(f"      Profile summary:   {len(data.profile_summary)} chars")
     print(f"      Organizations:     {len(data.orgs)}")
     for i, org in enumerate(data.orgs):

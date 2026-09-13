@@ -87,12 +87,14 @@ COPY --from=builder /usr/local/bin/envconsul /usr/local/bin/envconsul
 COPY --chown=$USER docker-entrypoint.sh /docker-entrypoint.sh
 COPY --chown=$USER fixtures.sh $HOME/fixtures.sh
 COPY --chown=$USER resume.ctmpl $HOME/resume.ctmpl
+COPY --chown=$USER resume-markdown.ctmpl $HOME/resume-markdown.ctmpl
 
 
 # Set File Permissions
 RUN sudo chmod 755 /docker-entrypoint.sh
 RUN sudo chmod 755 $HOME/fixtures.sh
 RUN sudo chmod 755 $HOME/resume.ctmpl
+RUN sudo chmod 755 $HOME/resume-markdown.ctmpl
 
 
 # Set Folder Ownership
