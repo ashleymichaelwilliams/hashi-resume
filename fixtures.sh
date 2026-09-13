@@ -1,7 +1,6 @@
 # Populate Consul with Data
 consul kv put "$1/address" "San Diego, California"
 consul kv put "$1/email" "ashleymichaelwilliams@gmail.com"
-consul kv put "$1/phone" "619-807-0682"
 consul kv put "$1/profile_summary" "Staff Platform Engineer with 15+ years building cloud infrastructure and automated delivery systems. Led internal developer platform strategy and standardized delivery patterns across 500+ applications. Experience spans Kubernetes, infrastructure as code, enterprise secrets management, and observability across AWS, GCP, and Azure cloud environments."
 
 consul kv put "$1/org/0/name" "LYTX, INC. | Remote | March 2021 - Present"

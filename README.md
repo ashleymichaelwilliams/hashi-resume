@@ -36,7 +36,8 @@ A self-contained Docker-based resume renderer that populates Consul KV with resu
 ./build.sh
 
 # 2. Run the container and render the resume
-./run.sh ASHLEY_WILLIAMS
+./run.sh ASHLEY_WILLIAMS          # plain text output
+./run.sh ASHLEY_WILLIAMS markdown  # markdown output (for GitHub READMEs)
 ```
 
 The rendered resume prints to your terminal, and Consul's web UI opens at `http://localhost:8500/ui/dc1/kv`.
@@ -51,7 +52,8 @@ The rendered resume prints to your terminal, and Consul's web UI opens at `http:
 | `docker-entrypoint.sh` | Starts Consul in dev mode (`-dev -server -ui`) |
 | `fixtures.sh` | Shell script with `consul kv put` commands for all resume data |
 | `generate_fixtures.py` | Parses PDF resume → generates `fixtures.sh` (uses `pypdf`) |
-| `resume.ctmpl` | Consul Template that renders the KV data into formatted text |
+| `resume.ctmpl` | Consul Template that renders KV data into formatted plain text |
+| `resume-markdown.ctmpl` | Consul Template that renders KV data into Markdown (GitHub README style) |
 | `fixtures-original.sh` | Backup of original placeholder fixtures |
 
 ## Regenerating Fixtures from PDF
@@ -77,7 +79,6 @@ The PDF resume is parsed and mapped to Consul KV keys:
 |---------------|---------------|
 | Address | `$1/address` |
 | Email | `$1/email` |
-| Phone | `$1/phone` |
 | Profile Summary | `$1/profile_summary` |
 | Company (with location/dates) | `$1/org/<N>/name` |
 | Position Title | `$1/org/<N>/position/<P>/name` |
@@ -98,12 +99,13 @@ Where `$1` is the key prefix (e.g., `ASHLEY_WILLIAMS`).
 1. `docker run` starts container with `FULL_NAME` env var
 2. `docker-entrypoint.sh` starts Consul agent in dev mode on port 8500
 3. `run.sh` sources `fixtures.sh` → populates Consul KV store
-4. `consul-template` renders `resume.ctmpl` → `resume.txt` using KV data
-5. `run.sh` prints `resume.txt` and opens Consul UI
+4. `consul-template` renders `resume.ctmpl` → `resume.txt` (or `resume-markdown.ctmpl` → `resume.md`) using KV data
+5. `run.sh` prints the rendered resume and opens Consul UI
 
 ## Usage Notes
 
-- Use underscores in the key prefix (e.g., `ASHLEY_WILLIAMS`); the template converts `_` → space for display
+- Use underscores in the key prefix (e.g., `ASHLEY_WILLIAMS`); text output converts `_` → space for display
+- Markdown output excludes the phone number for privacy on public profiles
 - The container is ephemeral (`--rm`); all data is in-memory (Consul dev mode)
 - To clear cached data and start fresh: `docker stop hashi-resume && docker rm hashi-resume`
 - Re-running `./run.sh` with the same name will detect existing KV data and skip re-loading fixtures

@@ -1,0 +1,82 @@
+{{ $FULL_NAME := printf "%s" (env "FULL_NAME") -}}
+{{ $display_name := $FULL_NAME | replaceAll "_" " " -}}
+{{ $root := printf "%s" $FULL_NAME -}}
+{{ $email := key (printf "%s/email" $root) -}}
+{{ $summary := key (printf "%s/profile_summary" $root) -}}
+
+<img src="imgs/me.jpg" width="350">
+
+#### Hello, my name is [{{ $display_name }}](mailto:{{ $email }}). Welcome to my professional journey! 👋
+
+A bit about me...
+> {{ $summary }}
+
+---
+
+### Technical Expertise
+
+#### Cloud Platforms
+- AWS
+- GCP
+- Azure
+- Kubernetes
+- VMware
+
+#### Platform Engineering
+- CI/CD
+- Infrastructure as code
+- GitOps
+- Developer self-service
+- AI Ops Platform
+
+#### Security
+- Secrets Management
+- SCA/SAST
+- WAF
+- EDR
+- SIEM
+- RBAC
+- OPA/Rego
+
+#### Observability
+- Datadog
+- Honeycomb
+- OpenTelemetry
+- Prometheus
+- Grafana
+- APM
+- Synthetic testing
+
+#### Engineering
+- Bash/Python
+- Architecture
+- Distributed Systems
+- APIs
+- Pub/Sub & IOT Edge Device Messaging
+- Cloud Networking
+
+#### AI Agent Platforms
+- Retrieval-Augmented Generation (RAG)
+- Model Context Protocol (MCP)
+- Agent2Agent (A2A)
+- Bedrock AgentCore
+
+<br><br>
+
+## Professional Experience
+
+{{ range $org_key, $org_data := tree (printf "%s/org/" $root) | byKey -}}
+#### {{ key (printf "%s/org/%s/name" $root $org_key) }}
+
+{{ range $pos_key, $pos_data := tree (printf "%s/org/%s/position/" $root $org_key) | byKey -}}
+{{ if ne $pos_key "0" }}
+{{ end -}}
+#### {{ key (printf "%s/org/%s/position/%s/name" $root $org_key $pos_key) }}
+
+{{ range $task_key, $task_val := tree (printf "%s/org/%s/position/%s/tasks/" $root $org_key $pos_key) -}}
+- {{ .Value }}
+{{ end -}}
+{{ end -}}
+<br>
+
+{{ end -}}
